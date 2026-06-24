@@ -1,33 +1,26 @@
-# 🐛 DefectFlow - Defect Management System
+# defect_manage2
 
-**Version**: 2.0.0  
-**Focus**: Data Synchronization and Defect Management Workflow
+DefectFlow defect management application converted to a local PostgreSQL and Node API runtime.
 
-DefectFlow is a web-based defect management tool that uses Supabase for data management.
+## Runtime
 
-## Documentation
-- Korean overview: [docs/README_ko.md](./docs/README_ko.md)
-- Technical docs index: [docs/README.md](./docs/README.md)
-- Workspace setup guide: [docs/workspace_setup_guide.md](./docs/workspace_setup_guide.md)
-- Chrome extension team test guide: [docs/chrome_extension_test_guide.md](./docs/chrome_extension_test_guide.md)
+- Frontend: HTML, vanilla JavaScript, CSS
+- Backend: Node.js API server
+- Database: local PostgreSQL
+- Default API URL: `http://127.0.0.1:3000/api`
+- Default PostgreSQL: `127.0.0.1:54323`, database `defect_manage2`, user `postgres`
 
-## 📁 Tech Stack
-- **Frontend**: HTML, JavaScript (Vanilla), CSS
-- **Backend**: [Supabase](https://supabase.com/) (PostgreSQL)
-- **Encryption**: `bcryptjs` (Password hashing)
-- **Additional Libraries**: `html2canvas` (Screen capture)
+## Local Commands
 
-## 🛡 Security & Authentication
-- **Login Service**: Authentication required for system access.
-- **Password Management**: Client-side hashing used for transmission and storage.
-- **Role Management**: Access control based on user roles (Tester, Actioner, Admin).
+```powershell
+npm.cmd run check:syntax
+npm.cmd run test:unit
+.\scripts\start_local_db.ps1
+.\scripts\stop_local_db.ps1
+```
 
-## 🚀 Key Features
-- **Dashboard**: Displays defect statistics and status charts.
-- **Defect Management**: Search, filter, view details, and edit defect reports.
-- **Test Bench Integration**: External site widget for defect registration and automated screen capture.
-- **Chrome Extension MVP**: Team-testable unpacked extension for visible-tab capture and in-page overlay registration.
-- **Image Storage**: Existing screenshots may use legacy URLs, and new screenshots are stored inline in `defects.screenshot`.
+## Notes
 
----
-*Created and maintained by Antigravity AI Assistant.*
+- Browser code uses `StorageService` over `/api/*`; it does not call Supabase directly.
+- Local database files, backups, logs, and `node_modules` are ignored by Git.
+- Supabase migration support is provided by `scripts/migrate_supabase_to_local.ps1`.
