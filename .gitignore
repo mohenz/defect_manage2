@@ -6,6 +6,9 @@ playwright-report/
 data/*.json
 !data/README.md
 images/
+!docs/images/
+!docs/images/user-manual/
+!docs/images/user-manual/*.png
 .env
 local/postgres-data/
 local/backups/

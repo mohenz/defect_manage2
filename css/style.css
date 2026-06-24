@@ -66,6 +66,8 @@ nav {
     display: flex;
     flex-direction: column;
     gap: 0.25rem;
+    flex: 1;
+    min-height: 0;
 }
 
 .nav-item {
@@ -92,12 +94,94 @@ nav {
     color: white;
 }
 
+.manual-nav-item {
+    margin-top: auto;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
 /* Main Content Area */
 main {
     flex: 1;
     margin-left: 260px;
     padding: 2.5rem 4rem;
     max-width: 100%;
+}
+
+.manual-view {
+    max-width: 1080px;
+}
+
+.manual-card {
+    background: var(--bg-main);
+    border: 1px solid var(--border);
+    border-radius: 0.75rem;
+    box-shadow: var(--card-shadow);
+    padding: 2.25rem;
+}
+
+.manual-content {
+    color: var(--text-secondary);
+    line-height: 1.8;
+    font-size: 0.95rem;
+}
+
+.manual-content h1,
+.manual-content h2,
+.manual-content h3 {
+    color: var(--text-primary);
+    line-height: 1.35;
+}
+
+.manual-content h1 {
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+}
+
+.manual-content h2 {
+    font-size: 1.2rem;
+    margin: 1.75rem 0 0.75rem;
+}
+
+.manual-content h3 {
+    font-size: 1rem;
+    margin: 1.25rem 0 0.5rem;
+}
+
+.manual-content p {
+    margin: 0.5rem 0;
+}
+
+.manual-content ol,
+.manual-content ul {
+    margin: 0.5rem 0 1rem 1.25rem;
+}
+
+.manual-content code {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 0.25rem;
+    color: var(--text-primary);
+    padding: 0.1rem 0.35rem;
+}
+
+.manual-image {
+    margin: 1.25rem 0 1.75rem;
+}
+
+.manual-image img {
+    display: block;
+    width: 100%;
+    border: 1px solid var(--border);
+    border-radius: 0.5rem;
+    box-shadow: var(--card-shadow);
+}
+
+.manual-image figcaption {
+    margin-top: 0.5rem;
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    text-align: center;
 }
 
 @media (max-width: 1200px) {

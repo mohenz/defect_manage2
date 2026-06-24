@@ -607,6 +607,9 @@ window.App = {
         selectedDefect: null,
         commonCodes: [],
         settingsTab: 'test-types',
+        userManualContent: '',
+        userManualLoading: false,
+        userManualError: '',
         returnTo: null,
         sessionRestoreComplete: false
     },
@@ -964,6 +967,7 @@ window.App = {
             case 'users': this.renderUsers(root); break;
             case 'settings': this.renderSettings(root); break;
             case 'extension-guide': this.renderExtensionGuide(root); break;
+            case 'user-manual': this.renderUserManual(root); break;
             case 'register':
                 if (this.state.isStandalone) {
                     this.renderStandaloneShell(root);
@@ -1030,6 +1034,134 @@ window.App = {
 
     renderExtensionGuide(container, options = {}) {
         return AuthModule.renderExtensionGuide(this, container, options);
+    },
+
+    async loadUserManual() {
+        if (this.state.userManualLoading || this.state.userManualContent) {
+            return;
+        }
+
+        this.state.userManualLoading = true;
+        this.state.userManualError = '';
+
+        try {
+            const response = await fetch('./docs/user_manual.md', { cache: 'no-store' });
+            if (!response.ok) {
+                throw new Error(`사용자메뉴얼을 불러오지 못했습니다. (${response.status})`);
+            }
+            this.state.userManualContent = await response.text();
+        } catch (error) {
+            console.error('[App] Failed to load user manual:', error);
+            this.state.userManualError = error?.message || '사용자메뉴얼을 불러오지 못했습니다.';
+        } finally {
+            this.state.userManualLoading = false;
+            if (this.state.currentView === 'user-manual') {
+                this.render();
+            }
+        }
+    },
+
+    renderManualMarkdown(markdown = '') {
+        const inline = (text = '') => this.sanitize(text)
+            .replace(/`([^`]+)`/g, '<code>$1</code>')
+            .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+
+        let listType = '';
+        const html = [];
+        const closeList = () => {
+            if (listType) {
+                html.push(`</${listType}>`);
+                listType = '';
+            }
+        };
+
+        String(markdown || '').split(/\r?\n/).forEach((rawLine) => {
+            const line = rawLine.trim();
+
+            if (!line) {
+                closeList();
+                return;
+            }
+
+            if (line === '---') {
+                closeList();
+                html.push('<hr>');
+                return;
+            }
+
+            const heading = line.match(/^(#{1,3})\s+(.+)$/);
+            if (heading) {
+                closeList();
+                html.push(`<h${heading[1].length}>${inline(heading[2])}</h${heading[1].length}>`);
+                return;
+            }
+
+            const image = line.match(/^!\[([^\]]*)\]\(([^)]+)\)$/);
+            if (image) {
+                closeList();
+                const rawSrc = image[2].trim();
+                const src = rawSrc.startsWith('images/') ? `./docs/${rawSrc}` : rawSrc;
+                html.push(`
+                    <figure class="manual-image">
+                        <img src="${this.sanitize(src)}" alt="${this.sanitize(image[1])}">
+                        ${image[1] ? `<figcaption>${this.sanitize(image[1])}</figcaption>` : ''}
+                    </figure>
+                `);
+                return;
+            }
+
+            const ordered = line.match(/^\d+\.\s+(.+)$/);
+            if (ordered) {
+                if (listType !== 'ol') {
+                    closeList();
+                    listType = 'ol';
+                    html.push('<ol>');
+                }
+                html.push(`<li>${inline(ordered[1])}</li>`);
+                return;
+            }
+
+            const unordered = line.match(/^\*\s+(.+)$/);
+            if (unordered) {
+                if (listType !== 'ul') {
+                    closeList();
+                    listType = 'ul';
+                    html.push('<ul>');
+                }
+                html.push(`<li>${inline(unordered[1])}</li>`);
+                return;
+            }
+
+            closeList();
+            html.push(`<p>${inline(line)}</p>`);
+        });
+
+        closeList();
+        return html.join('');
+    },
+
+    renderUserManual(container) {
+        if (!this.state.userManualContent && !this.state.userManualLoading && !this.state.userManualError) {
+            this.loadUserManual();
+        }
+
+        const body = this.state.userManualLoading
+            ? '<div class="loader">사용자메뉴얼을 불러오는 중...</div>'
+            : this.state.userManualError
+                ? `<div class="manual-card"><p style="color: var(--error);">${this.sanitize(this.state.userManualError)}</p></div>`
+                : `<div class="manual-card"><div class="manual-content">${this.renderManualMarkdown(this.state.userManualContent)}</div></div>`;
+
+        container.innerHTML = `
+            <div class="manual-view animate-in">
+                <header>
+                    <div>
+                        <h1>사용자메뉴얼</h1>
+                        <p class="subtitle">DefectFlow 주요 사용 절차와 권한별 작업 기준입니다.</p>
+                    </div>
+                </header>
+                ${body}
+            </div>
+        `;
     },
 
     handleLogout() {
