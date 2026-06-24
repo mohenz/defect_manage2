@@ -1,4 +1,4 @@
-# DefectFlow 작업 환경 가이드
+﻿# DefectFlow 작업 환경 가이드
 
 이 문서는 다른 PC에서 `defect_manage` 프로젝트를 이어서 작업할 때 필요한 준비 사항, 실행 방법, 점검 절차를 정리한 문서입니다.
 
@@ -27,7 +27,7 @@ npm install
 
 - `css/`: 스타일
 - `js/`: 프론트엔드 로직 및 Supabase 연동 코드
-- `database/`: SQL 스키마 및 보조 스크립트
+- `support/database/`: SQL 스키마 및 보조 스크립트
 - `tests/`: 단위 테스트 및 E2E 테스트
 - `docs/`: 기술 문서
 - `.github/workflows/`: GitHub Pages 자동 배포 설정

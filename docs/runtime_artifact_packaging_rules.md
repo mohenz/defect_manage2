@@ -1,4 +1,4 @@
-# DefectFlow 런타임 아티팩트 포함/제외 규칙
+﻿# DefectFlow 런타임 아티팩트 포함/제외 규칙
 
 ## 1. 목적
 - `defect_manage2` 개선 작업 중 실행 및 배포에 필요한 파일만 유지한다.
@@ -22,7 +22,7 @@
 - 프론트엔드 경로:
 - [css](/d:/Workspace/defect_manage2/css)
 - [js](/d:/Workspace/defect_manage2/js)
-- [images](/d:/Workspace/defect_manage2/images)
+- [local/legacy-images](/d:/Workspace/defect_manage2/local/legacy-images)
 - [extension](/d:/Workspace/defect_manage2/extension)
 
 - 운영 참고 문서:
@@ -56,7 +56,7 @@
   런타임에는 불필요하므로 전달용 패키지에서는 제외 가능
 - `.agent/`
   런타임에는 불필요하므로 제외 가능
-- `database/`
+- `support/database/`
   이번 프로젝트 범위는 DB 구조 변경이 아니므로 운영 패키지 필수 대상은 아님. 다만 참고용 SQL 보관이 필요하면 저장소에는 유지 가능
 
 ## 6. 권장 패키징 원칙

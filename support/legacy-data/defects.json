@@ -1,0 +1,18 @@
+[
+    {
+        "defect_id": 1,
+        "title": "Legacy fixture defect",
+        "creator": "김철수",
+        "assignee": "박지성",
+        "status": "Open",
+        "severity": "Medium"
+    },
+    {
+        "defect_id": 2,
+        "title": "Legacy fixture defect 2",
+        "creator": "이영희",
+        "assignee": "손흥민",
+        "status": "In Progress",
+        "severity": "High"
+    }
+]

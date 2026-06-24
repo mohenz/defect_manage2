@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 
 const ROOT_DIR = path.resolve(__dirname, '..');
-const MENU_LIST_PATH = path.join(ROOT_DIR, 'eclub_memuList.txt');
+const MENU_LIST_PATH = path.join(ROOT_DIR, 'support', 'screen-paths', 'eclub_memuList.txt');
 const SCREEN_PATH_GROUP = 'SCREEN_PATH';
 const API_BASE_URL = (process.env.DEFECTFLOW_API_BASE_URL || 'http://127.0.0.1:3000/api').replace(/\/$/, '');
 

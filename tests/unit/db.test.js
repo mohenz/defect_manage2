@@ -3,8 +3,8 @@ import fs from 'fs';
 import path from 'path';
 
 describe('Database Integrity Test', () => {
-    const usersPath = path.resolve(__dirname, '../../data/users.json');
-    const defectsPath = path.resolve(__dirname, '../../data/defects.json');
+    const usersPath = path.resolve(__dirname, '../../support/legacy-data/users.json');
+    const defectsPath = path.resolve(__dirname, '../../support/legacy-data/defects.json');
 
     it('should have valid users.json with virtual users', () => {
         const users = JSON.parse(fs.readFileSync(usersPath, 'utf8'));

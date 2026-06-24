@@ -10,4 +10,8 @@ images/
 local/postgres-data/
 local/backups/
 local/*.log
+local/logs/
+local/legacy-data/
+local/legacy-images/
+local/test-artifacts/
 local/.schema_applied

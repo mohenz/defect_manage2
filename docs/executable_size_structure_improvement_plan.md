@@ -206,7 +206,7 @@
 - `index.html`
 - `css/`
 - `js/`
-- `images/`
+- `local/legacy-images/`
 - `extension/`
 - `server.js`
 - `package.json`

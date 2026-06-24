@@ -1,4 +1,4 @@
-# DefectFlow — 변경 이력 (CHANGELOG)
+﻿# DefectFlow — 변경 이력 (CHANGELOG)
 
 > 이 파일은 DefectFlow 시스템의 기능 개선, 버그 수정, 구조 변경 이력을 날짜순으로 기록합니다.
 > 최신 내용이 상단에 위치합니다.
@@ -112,7 +112,7 @@
   - 운영 DB probe 검증 결과 기준으로 `title`, `menu_name`, `screen_name`, `env_info`, `creator`, `assignee` 길이를 `VARCHAR(255)`로 정정
   - `screen_url`은 `TEXT`, `steps_to_repro`는 `TEXT`, `defect_identification`은 `VARCHAR(50)` 기준을 문서에 반영
   - 한글/영문 설계 문서와 Oracle 마이그레이션 가이드, 로컬 스키마 파일의 관련 값을 함께 정리
-- **수정 파일**: `docs/db_schema.md`, `docs/program_design.md`, `docs/program_design_en.md`, `docs/java_spring_oracle_migration_guide.md`, `database/schema.sql`
+- **수정 파일**: `docs/db_schema.md`, `docs/program_design.md`, `docs/program_design_en.md`, `docs/java_spring_oracle_migration_guide.md`, `support/database/schema.sql`
 
 #### 65. 외부 연동 URL 정규화 및 길이 초과 진단 보강
 - **배경**: 운영 로그에서 `value too long for type character varying(255)` 오류가 반복됐고, 실제 원인 필드를 빠르게 특정할 수 있는 정보가 부족했음
@@ -131,7 +131,7 @@
   - 관리자 화면에 `저장 오류 로그` 탭을 추가해 중앙 로그 조회, 상세 내용 확인, JSON 다운로드, 로컬 백업 초기화가 가능하도록 구성
   - 외부 연동 캡처 이미지처럼 큰 inline 이미지가 들어오는 경우 저장 전에 한 번 더 최적화하도록 보강
   - Supabase 저장 실패 시 `stage`, `message`, `code`, `details`, `hint`를 구조화해 앱에서 활용할 수 있도록 정리
-- **수정 파일**: `js/app.js`, `js/storage.js`, `docs/db_schema.md`, `database/create_defect_save_error_logs.sql`
+- **수정 파일**: `js/app.js`, `js/storage.js`, `docs/db_schema.md`, `support/database/create_defect_save_error_logs.sql`
 
 #### 62. PC 신규 결함 등록의 모바일 전용 화면 버튼을 관리자 전용으로 제한
 - **배경**: 일반 사용자에게는 모바일 전용 등록 버튼의 목적이 불명확해 혼선을 줄 수 있었음
@@ -298,9 +298,9 @@
 - **수정 파일**: `js/app.js`, `js/storage.js`
 
 #### 39. eClub 화면 리스트 공통코드 적재 스크립트 추가
-- **배경**: `eclub_memuList.txt`의 화면 리스트를 반복 사용 가능한 방식으로 공통코드에 적재할 수 있어야 했음
+- **배경**: `support/screen-paths/eclub_memuList.txt`의 화면 리스트를 반복 사용 가능한 방식으로 공통코드에 적재할 수 있어야 했음
 - **변경 사항**:
-  - `eclub_memuList.txt`를 정규화해 `SCREEN_PATH` 공통코드로 동기화하는 스크립트 추가
+  - `support/screen-paths/eclub_memuList.txt`를 정규화해 `SCREEN_PATH` 공통코드로 동기화하는 스크립트 추가
   - `npm run seed:screen-paths` 명령으로 로컬에서 재실행 가능하도록 구성
 - **수정 파일**: `scripts/import-screen-path-codes.js`, `package.json`
 
