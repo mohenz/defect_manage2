@@ -35,8 +35,8 @@ const collectJsTargets = (relativeDir) => {
 
 const targets = [
     'server.js',
-    'playwright.config.js',
-    'vitest.config.js',
+    'config/playwright.config.js',
+    'config/vitest.config.js',
     ...collectJsTargets('js')
 ];
 

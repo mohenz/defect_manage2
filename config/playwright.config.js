@@ -3,7 +3,7 @@ const PLAYWRIGHT_PORT = process.env.PLAYWRIGHT_PORT || '3001';
 const PLAYWRIGHT_BASE_URL = `http://localhost:${PLAYWRIGHT_PORT}`;
 
 module.exports = defineConfig({
-    testDir: './tests/e2e',
+    testDir: '../tests/e2e',
     fullyParallel: true,
     forbidOnly: !!process.env.CI,
     retries: process.env.CI ? 2 : 0,
